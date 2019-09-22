@@ -1,6 +1,15 @@
 ## Welcome to txl Pages
 
 
+### 添加.到PATH环境变量中去--当前用户级别
+
++ vim .bashrc
++ export PATH=$PATH:.
++ source .bashrc
+  
+![Image of Yaktocat](assets\images\bashrc.png)
+
+
 ### 正则
 
 ```shell
