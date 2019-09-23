@@ -115,7 +115,121 @@ fi
 
 ### 菜单
 
+> 目录结构
+![Image of Yaktocat](assets\images\rolo1.png)
 
+> rolo
+```shell
+if [ "$#" -ne 0 ];then
+	lu "$@"
+	exit
+fi
+validchoice=""
+
+until [ -n "$validchoice" ]
+do
+echo -n '
+	Would you like to:
+		1.Look someone up
+		2.add someone to the phone book
+		3.Remove someone from the phone book
+		q.quit
+	Please select one of the above (1-3):'
+
+read choice
+
+echo ""
+case "$choice"
+in
+	1) echo -n "Enter name to look up:"
+	   read name
+	   lu "$name";;
+	2) echo -n "Enter name to be added:"
+	   read name
+	   echo -n "Enter number:"
+	   read number
+	   add "$name" "$number";;
+	3) echo -n "Enter name to be remove:"
+	   read name
+	   rem "$name";;
+	q) echo "quit"
+           exit 1;;
+	*) echo "Bad choice";;
+esac
+done
+
+```
+
+>rem
+```shell
+if [ "$#" -ne 1 ]
+then
+	echo "Incorrect number of arguments."
+	echo "Usage:rem name"
+	exit 1
+fi
+
+name=$1
+
+matches=$(grep "$name" phonebook | wc -l)
+
+if [ "$matches" -gt 1 ]
+then
+	echo "More than one match;Please qualify further"
+elif [ "$matches" -eq 1 ]
+then
+	grep -v "$name" phonebook > /tmp/phonebook$$
+	mv /tmp/phonebook$$ phonebook
+else
+	echo "I could not find $name in the phone book"
+fi
+
+
+```
+
+> add
+```shell
+
+if [ "$#" -ne 1 ]
+then
+	echo "Incorrect number of arguments."
+	echo "Usage:rem name"
+	exit 1
+fi
+
+name=$1
+
+matches=$(grep "$name" phonebook | wc -l)
+
+if [ "$matches" -gt 1 ]
+then
+	echo "More than one match;Please qualify further"
+elif [ "$matches" -eq 1 ]
+then
+	grep -v "$name" phonebook > /tmp/phonebook$$
+	mv /tmp/phonebook$$ phonebook
+else
+	echo "I could not find $name in the phone book"
+fi
+
+```
+
+>add
+```shell
+if [ "$#" -ne 2 ]
+then
+	echo "Incorrect numbers of arguments."
+	echo "Usage:add name phone"
+	exit 1
+fi
+
+name=$1
+phone=$2
+
+echo "$1	$2" >> phonebook
+sort -o phonebook phonebook
+
+```
 
 
 ## 0.常见命令
