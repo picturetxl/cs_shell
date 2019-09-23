@@ -120,6 +120,16 @@ fi
 
 > rolo
 ```shell
+
+# 为了便于修改和发行
+PHONEBOOK=$HOME/phonebook
+export PHONEBOOK
+
+if [ ! -f "$PHONEBOOK" ];then
+	echo "No phone book file in $HOME "
+	exit 1
+fi
+
 if [ "$#" -ne 0 ];then
 	lu "$@"
 	exit
@@ -171,15 +181,15 @@ fi
 
 name=$1
 
-matches=$(grep "$name" phonebook | wc -l)
+matches=$(grep "$name" $PHONEBOOK | wc -l)
 
 if [ "$matches" -gt 1 ]
 then
 	echo "More than one match;Please qualify further"
 elif [ "$matches" -eq 1 ]
 then
-	grep -v "$name" phonebook > /tmp/phonebook$$
-	mv /tmp/phonebook$$ phonebook
+	grep -v "$name" $PHONEBOOK > /tmp/phonebook$$
+	mv /tmp/phonebook$$ $PHONEBOOK
 else
 	echo "I could not find $name in the phone book"
 fi
@@ -200,7 +210,7 @@ fi
 name=$1
 
 
-if grep "$name" phonebook 
+if grep "$name" $PHONEBOOK 
 then
 	:
 else
@@ -221,22 +231,54 @@ fi
 name=$1
 phone=$2
 
-echo "$1	$2" >> phonebook
-sort -o phonebook phonebook
+echo "$1	$2" >> $PHONEBOOK
+sort -o $PHONEBOOK $PHONEBOOK
 
 ```
 
 ![Image of Yaktocat](assets\images\rolo.png)
 
+---
 
-## 0.常见命令
 
+## 3.有意思的命令(安装)
+
++ sudo apt-get install screenfetch
+![Image of Yaktocat](assets\images\screenfetch.png)
+
+
+
+## 4.环境
 
 ### export 命令
 > 要明白子shell的概念 每当执行一个命令时,都是启动一个子shell来执行,所以相当于两个环境.父shell使用export将局部变量传递给所有的子shell(复制export变量到子shell中),而子shell修改export变量不影响父shell的export变量
 
 + export -p #输出所有的export变量
 ![Image of Yaktocat](assets\images\export.png)
+
+---
+### PS1 和 PS2
+
++ PS1 保存命令行提示符的环境变量
+![Image of Yaktocat](assets\images\PS1.png)
+
++ PS2 保存辅助命令行提示符
+![Image of Yaktocat](assets\images\PS2.png)
+
+---
+
+### HOME 
+> 用于保存用户登陆系统后所处的位置 不要轻易改变
+
+![Image of Yaktocat](assets\images\HOME.png)
+
+
+### PATH
+> PATH 环境变量的作用: 当你输入程序名的时候,shell会在一个目录列表里面查找指定的程序,直到找到为止,而这个目录列表就是HOME变量保存的目录,搜索顺序为谁在前,谁先搜索
+
+![Image of Yaktocat](assets\images\PATH.png)
+
+## 0.常见命令
 
 ### nl 命令 输出行号
 + nl file
