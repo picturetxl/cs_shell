@@ -113,7 +113,7 @@ fi
 
 ```
 
-### 菜单
+### 菜单程序
 
 > 目录结构
 ![Image of Yaktocat](assets\images\rolo1.png)
@@ -187,29 +187,24 @@ fi
 
 ```
 
-> add
+> lu
 ```shell
-
 if [ "$#" -ne 1 ]
 then
-	echo "Incorrect number of arguments."
-	echo "Usage:rem name"
+	echo "Incorrect nmber of arguments."
+	echo "Usage:lu name"
 	exit 1
 fi
 
+
 name=$1
 
-matches=$(grep "$name" phonebook | wc -l)
 
-if [ "$matches" -gt 1 ]
+if grep "$name" phonebook 
 then
-	echo "More than one match;Please qualify further"
-elif [ "$matches" -eq 1 ]
-then
-	grep -v "$name" phonebook > /tmp/phonebook$$
-	mv /tmp/phonebook$$ phonebook
+	:
 else
-	echo "I could not find $name in the phone book"
+	echo "Not found or error occurs"
 fi
 
 ```
@@ -231,8 +226,17 @@ sort -o phonebook phonebook
 
 ```
 
+![Image of Yaktocat](assets\images\rolo.png)
+
 
 ## 0.常见命令
+
+
+### export 命令
+> 要明白子shell的概念 每当执行一个命令时,都是启动一个子shell来执行,所以相当于两个环境.父shell使用export将局部变量传递给所有的子shell(复制export变量到子shell中),而子shell修改export变量不影响父shell的export变量
+
++ export -p #输出所有的export变量
+![Image of Yaktocat](assets\images\export.png)
 
 ### nl 命令 输出行号
 + nl file
