@@ -36,7 +36,7 @@ $:行尾
 ### ps
 
 + ps
-+ ps -f 
++ ps -f
 ![Image of Yaktocat](assets\images\ps.png)
 
 ---
@@ -44,7 +44,7 @@ $:行尾
 ### ed 
 + ed file
 + 1,$p
-+ / ... /
++ / ... \/
 + /the/
 ![Image of Yaktocat](assets\images\ed1.png)
 
@@ -96,6 +96,7 @@ $:行尾
 > 默认情况下 sed将输入的每一行都写入到标准输出中,不管其内容是否发生变化
 
 + sed -n l sth
+
 ![Image of Yaktocat](assets\images\sed1.png)
 
 + sed 's/Unix/UNIX/' file
@@ -121,7 +122,7 @@ Backspace|10
 Tab|11
 Newline|12
 
-+ data | tr ' ' ' ' '\12'  
++ data \| tr ' ' ' ' '\12'  
 ![Image of Yaktocat](assets\images\tr1.png)
 
 + tr e x < file
