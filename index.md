@@ -29,7 +29,8 @@ $:行尾
 
 ### 重定向
 + ls n* 2>errors
-> ls n* 是没有该文件,所以会向标准错误输出一条信息,但是标准错误被重定向到文件errors
+
+ls n* 是没有该文件,所以会向标准错误输出一条信息,但是标准错误被重定向到文件errors
 
 ---
 
@@ -37,6 +38,7 @@ $:行尾
 
 + ps
 + ps -f
+
 ![Image of Yaktocat](assets\images\ps.png)
 
 ---
@@ -44,7 +46,7 @@ $:行尾
 ### ed 
 + ed file
 + 1,$p
-+ / ... \/
++ / ... /
 + /the/
 ![Image of Yaktocat](assets\images\ed1.png)
 
@@ -63,6 +65,7 @@ $:行尾
 
 + who \| cut -c1-3
 + who
+
 ![Image of Yaktocat](assets\images\cut1.png)
 
 + cut -d: -f1 /etc/passwd
@@ -79,6 +82,7 @@ $:行尾
 + cat names
 + cat numbers
 + paste names numbers
+
 ![Image of Yaktocat](assets\images\paste1.png)
 
 + paste -d':' names numbes
@@ -121,6 +125,7 @@ Bell|7
 Backspace|10
 Tab|11
 Newline|12
+---
 
 + data \| tr ' ' ' ' '\12'  
 ![Image of Yaktocat](assets\images\tr1.png)
