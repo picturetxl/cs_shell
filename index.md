@@ -45,7 +45,99 @@
 
 ---
 
+### test
+
+操作符 | 满足为真
+------------ | -------------
+-d file | 目录
+-e file | 存在
+-f file | 普通文件
+-r file | 可读
+-s file | 不是空文件
+-w file | 可写
+-x file | 可执行
+-L file | 符号链接
+
+
+---
+
+
+### cp命令的实现
+```shell
+## copy files
+
+numargs=$#
+filelist=
+copylist=
+
+#处理用户参数 分解成filelist 和 to
+while [ "$#" -gt 1 ];do
+	filelist="$filelist $1"
+	shift
+done
+
+to="$1"
+
+# 如果参数数目小于2 或者 参数数目大于2 但是to不是目录文件
+if [ "$numargs" -lt 2 -o "$numargs" -gt 2 -a ! -d "$to" ];then
+	echo "Usage:mycp file1 file2"
+	echo "      mycp file(s) dir"
+	exit 1
+fi
+
+# 遍历每一个文件
+for from in $filelist;do
+    # 判断是否是目录
+	if [ -d "$to" ];then
+		tofile="$to/$(basename $from)" # basename 命令 截取该文件名
+	else
+		tofile="$to"
+	fi
+    #判断文件是否存在
+	if [ -e "$tofile" ] ;then
+		echo "$tofile already exists;overwrite (yes/no)? \c"
+		read answer
+
+		if [ "$answer" = yes ];then
+			copylist="$copylist $from"
+		fi
+	else
+		copylist="$copylist $from"
+	fi
+done
+
+if [ -n "$copylist" ] ;then
+	cp $copylist $to
+fi
+
+
+```
+
+### 菜单
+
+
+
+
 ## 0.常见命令
+
+### nl 命令 输出行号
++ nl file
+![Image of Yaktocat](assets\images\nl.png)
+
+> 简单实现
+
+```shell
+lineno=1
+cat $* |
+while read line
+do
+	echo "    $lineno : $line"
+	lineno=$((lineno + 1))
+done
+```
+
+![Image of Yaktocat](assets\images\nl2.png)
+
 
 ### 正则
 
